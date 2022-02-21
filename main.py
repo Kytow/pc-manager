@@ -1,3 +1,4 @@
+# This project is old, the code is bad.
 from time import sleep
 from os import listdir, system, mkdir, chdir, rename
 from os.path import isdir
@@ -33,7 +34,7 @@ if pcchoice == 1:
             uniquefile = files[filenumber]
         except:
             clear()
-            print("Terminated ! The program'll close in 5 seconds")
+            print("Terminated ! The program will close in 5 seconds")
             sleep(5)
             quit()
         filenumber = filenumber + 1
@@ -72,3 +73,8 @@ if pcchoice == 1:
 elif pcchoice == 2:
     system("cleanmgr")
     clear()
+elif pcchoice == 3:
+    system("mrt")
+    clear()
+else:
+    quit

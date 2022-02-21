@@ -1,2 +1,2 @@
 @ECHO OFF
-pip install colorama pycenter
+pip install pystyle pycenter

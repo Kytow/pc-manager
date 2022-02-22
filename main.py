@@ -1,42 +1,42 @@
 # This project is old, the code is bad.
-from time import sleep
 from os import listdir, system, mkdir, chdir, rename
 from os.path import isdir
-from pystyle import *
+from colorama import Fore
 from pycenter import center
 
 
 def clear(): return system("cls")
 
 
-print(Colorate.Vertical(Colors.green_to_yellow, center("""
+print(center(f"""{Fore.LIGHTGREEN_EX}
 ██████   ██████     ███    ███  █████  ███    ██  █████   ██████  ███████ ██████
 ██   ██ ██          ████  ████ ██   ██ ████   ██ ██   ██ ██       ██      ██   ██
 ██████  ██          ██ ████ ██ ███████ ██ ██  ██ ███████ ██   ███ █████   ██████
 ██      ██          ██  ██  ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██      ██   ██
 ██       ██████     ██      ██ ██   ██ ██   ████ ██   ██  ██████  ███████ ██   ██
 \n
-""")))
+"""))
 
-print(center("[1] PC SORTER             [2] PC OPTIMIZER"))
+print(center(
+    f"{Fore.RESET}[1] PC SORTER             [2] PC OPTIMIZER             [3] VIRUS SCANNER"))
+
+while True:
+    try:
+        choice = int(input())
+        break
+    except:
+        print(
+            f"{Fore.RED}[!]{Fore.RESET} The choice isn't a number")
 
 
-pcchoice = int(input())
-
-if pcchoice == 1:
-    print("Directory to clean ?")
-    directoryclean = str(input())
-    chdir(directoryclean)
+def sortFiles():
     files = listdir()
     filenumber = 0
     while True:
         try:
             uniquefile = files[filenumber]
         except:
-            clear()
-            print("Terminated ! The program will close in 5 seconds")
-            sleep(5)
-            quit()
+            break
         filenumber = filenumber + 1
         splituniquefile = uniquefile.split(".")
         uniquefilebackslash = uniquefile.replace(" ", "_")
@@ -45,11 +45,11 @@ if pcchoice == 1:
         except:
             pass
         try:
-            if splituniquefile[1] == "png" or splituniquefile[1] == "jpg" or splituniquefile[1] == "jpeg":
-                if not isdir("Images"):
-                    mkdir("Images")
-                system(f"move {uniquefilebackslash} Images")
-            elif splituniquefile[1] == "docx" or splituniquefile[1] == "doc" or splituniquefile[1] == "pdf":
+            if splituniquefile[1] == "png" or splituniquefile[1] == "jpg" or splituniquefile[1] == "jpeg" or splituniquefile[1] == "gif" or splituniquefile[1] == "tiff":
+                if not isdir("Picures"):
+                    mkdir("Pictures")
+                system(f"move {uniquefilebackslash} Pictures")
+            elif splituniquefile[1] == "docx" or splituniquefile[1] == "doc" or splituniquefile[1] == "pdf" or splituniquefile[1] == "odt":
                 if not isdir("Documents"):
                     mkdir("Documents")
                 system(f"move {uniquefilebackslash} Documents")
@@ -62,19 +62,39 @@ if pcchoice == 1:
                     mkdir("Videos")
                 system(f"move {uniquefilebackslash} Videos")
             elif splituniquefile[1] == "mp3" or splituniquefile[1] == "wav":
-                if not isdir("Musique"):
-                    mkdir("Musique")
-                system(f"move {uniquefilebackslash} Musique")
+                if not isdir("Music"):
+                    mkdir("Music")
+                system(f"move {uniquefilebackslash} Music")
+            elif splituniquefile[1] == "exe":
+                if not isdir("Executables"):
+                    mkdir("Executables")
+                system(f"move {uniquefilebackslash} Executables")
             else:
                 pass
         except:
             pass
 
-elif pcchoice == 2:
+
+if choice == 1:
+    # Asks the user for the directory to be stored
+    while True:
+        print("Which directory do you want to sort?")
+        directoryclean = str(input())
+        try:
+            chdir(directoryclean)
+            break
+        except:
+            print(
+                f"{Fore.RED}[!]{Fore.RESET} The directory {directoryclean} isn't valid, exemple of directory : C:\\Users\\Kytow\\Downloads\\")
+
+    sortFiles()
+
+
+elif choice == 2:
     system("cleanmgr")
     clear()
-elif pcchoice == 3:
+elif choice == 3:
     system("mrt")
     clear()
 else:
-    quit
+    quit()
